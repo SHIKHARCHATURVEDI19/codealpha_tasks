@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe | Connect. Share. Inspire.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body { background-color: var(--bg-color); color: var(--text-primary); margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .landing-nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; padding: 1.5rem 4rem; z-index: 100; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        .landing-nav .brand { font-weight: 700; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; }
+        .landing-nav .links a { color: var(--text-secondary); margin-left: 2rem; text-decoration: none; transition: color 0.2s; }
+        .landing-nav .links a:hover { color: var(--text-primary); }
+        
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 6rem 2rem 2rem; position: relative; }
+        .hero h1 { font-size: 5rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s forwards ease-out; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 1s 0.2s forwards ease-out; }
+        .hero .cta-group { opacity: 0; animation: fadeUp 1s 0.4s forwards ease-out; display: flex; gap: 1rem; }
+        
+        .section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        .section h2 { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
+        
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
+        .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 3rem 2rem; border-radius: var(--radius-xl); transition: transform 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { font-size: 3.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .stat-label { color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        /* Features */
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .feature-card { background: var(--surface); border: 1px solid var(--border); padding: 3rem 2rem; border-radius: var(--radius-xl); transition: transform 0.3s, box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .feature-icon { width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+        
+        /* Showcase */
+        .showcase { text-align: center; }
+        .showcase-img { width: 100%; max-width: 900px; border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        
+        /* Timeline */
+        .timeline { display: flex; flex-direction: column; gap: 2rem; max-width: 600px; margin: 0 auto; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { display: flex; gap: 2rem; position: relative; }
+        .timeline-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; z-index: 1; flex-shrink: 0; }
+        .timeline-content { padding-top: 0.5rem; }
+        
+        /* Testimonials */
+        .testimonials { display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; scroll-snap-type: x mandatory; }
+        .testimonial-card { flex: 0 0 400px; scroll-snap-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; }
+        
+        /* FAQ */
+        .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; cursor: pointer; }
+        .faq-question { display: flex; justify-content: space-between; font-weight: 600; font-size: 1.1rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; color: var(--text-secondary); margin-top: 0; }
+        .faq-item.active .faq-answer { max-height: 200px; margin-top: 1rem; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        
+        /* Footer */
+        footer { border-top: 1px solid var(--border); padding: 4rem 2rem; display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; color: var(--text-secondary); }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; margin-left: 1.5rem; }
+        .footer-links a:hover { color: var(--text-primary); }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+            .landing-nav { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora-bg"><div class="aurora-blob"></div></div>
+    
+    <nav class="landing-nav">
+        <a href="#" class="brand"><i data-lucide="zap" class="text-primary"></i> Vibe</a>
+        <div class="links d-flex align-center">
+            <a href="{% url 'login' %}">Sign In</a>
+            <a href="{% url 'register' %}" class="btn btn-primary" style="margin-left: 1.5rem; padding: 0.5rem 1rem;">Get Started</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Connect. Share. Inspire.</h1>
+        <p>The next-generation social platform built for creators, developers, and communities.</p>
+        <div class="cta-group">
+            <a href="{% url 'register' %}" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Get Started</a>
+            <a href="#features" class="btn btn-outline" style="padding: 1rem 2rem; font-size: 1.1rem; background: var(--surface); border-color: var(--border);">Explore</a>
+        </div>
+    </header>
+
+    <section class="section" id="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">Posts (K+)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="25">0</div>
+                <div class="stat-label">Users (K+)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="1">0</div>
+                <div class="stat-label">Likes (M+)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="99.9">0</div>
+                <div class="stat-label">Uptime (%)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="zap"></i></div>
+                <h3>Lightning Fast</h3>
+                <p class="text-secondary mt-2">Built on modern architecture ensuring zero lag and instantaneous interactions via advanced AJAX.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="sparkles"></i></div>
+                <h3>AI Powered</h3>
+                <p class="text-secondary mt-2">Integrated AI assistants to help you craft the perfect captions, hashtags, and replies automatically.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="message-square"></i></div>
+                <h3>Private Messaging</h3>
+                <p class="text-secondary mt-2">End-to-end encrypted direct messaging to keep your conversations entirely secure and private.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section showcase">
+        <h2>Beautiful Everywhere</h2>
+        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1200&q=80" alt="App Dashboard Mockup" class="showcase-img">
+    </section>
+
+    <section class="section" id="how-it-works">
+        <h2>Why Choose Us</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon"><i data-lucide="pen-tool"></i></div>
+                <div class="timeline-content">
+                    <h3>Create</h3>
+                    <p class="text-secondary">Draft beautiful posts with ease using our rich editor and AI enhancements.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"><i data-lucide="share-2"></i></div>
+                <div class="timeline-content">
+                    <h3>Share</h3>
+                    <p class="text-secondary">Instantly publish to your network or the global trending feed.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"><i data-lucide="users"></i></div>
+                <div class="timeline-content">
+                    <h3>Connect</h3>
+                    <p class="text-secondary">Engage with your audience in real-time through comments and likes.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"><i data-lucide="trending-up"></i></div>
+                <div class="timeline-content">
+                    <h3>Grow</h3>
+                    <p class="text-secondary">Monitor your analytics and watch your follower base expand organically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <h2>Loved by Creators</h2>
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <p class="mb-4">"This platform completely changed how I connect with my audience. The interface is stunningly fast."</p>
+                <div class="d-flex align-center gap-2">
+                    <div class="avatar avatar-sm" style="background: #333"></div>
+                    <div><strong>Alex Rivera</strong> <br> <span class="text-secondary">Digital Artist</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="mb-4">"The AI features alone save me hours every week. Plus, it looks absolutely gorgeous in dark mode."</p>
+                <div class="d-flex align-center gap-2">
+                    <div class="avatar avatar-sm" style="background: #444"></div>
+                    <div><strong>Sarah Chen</strong> <br> <span class="text-secondary">Tech Blogger</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="mb-4">"I moved my entire community here. The real-time interactions make it feel so alive."</p>
+                <div class="d-flex align-center gap-2">
+                    <div class="avatar avatar-sm" style="background: #555"></div>
+                    <div><strong>Marcus Johnson</strong> <br> <span class="text-secondary">Community Manager</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="faq" style="max-width: 800px;">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+            <div class="faq-question">Is it free to join? <i data-lucide="chevron-down" style="transition: 0.3s;"></i></div>
+            <div class="faq-answer">Yes, creating an account and using the core features is completely free for everyone.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How does the AI work? <i data-lucide="chevron-down" style="transition: 0.3s;"></i></div>
+            <div class="faq-answer">We use advanced LLM APIs to generate contextual captions and reply suggestions right within your editor.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Can I use it on mobile? <i data-lucide="chevron-down" style="transition: 0.3s;"></i></div>
+            <div class="faq-answer">Absolutely. The app is fully responsive and features a dedicated mobile layout with a bottom navigation bar.</div>
+        </div>
+    </section>
+
+    <section class="section text-center" style="padding: 10rem 2rem;">
+        <h2 style="font-size: 3rem; margin-bottom: 2rem;">Ready to join?</h2>
+        <a href="{% url 'register' %}" class="btn btn-primary" style="padding: 1.25rem 3rem; font-size: 1.2rem;">Get Started &rarr;</a>
+    </section>
+
+    <footer>
+        <div class="brand"><i data-lucide="zap" class="text-primary"></i> Vibe &copy; 2026</div>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+            <a href="#">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Scroll Intersection Observer for fade in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger number animation if it's the stats section
+                    if (entry.target.id === 'stats' && !entry.target.dataset.animated) {
+                        entry.target.dataset.animated = 'true';
+                        document.querySelectorAll('.stat-number').forEach(el => {
+                            const target = parseFloat(el.getAttribute('data-target'));
+                            const duration = 2000;
+                            const steps = 60;
+                            const stepValue = target / steps;
+                            let current = 0;
+                            
+                            const timer = setInterval(() => {
+                                current += stepValue;
+                                if (current >= target) {
+                                    el.innerText = target;
+                                    clearInterval(timer);
+                                } else {
+                                    el.innerText = (current % 1 === 0 ? current : current.toFixed(1));
+                                }
+                            }, duration / steps);
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

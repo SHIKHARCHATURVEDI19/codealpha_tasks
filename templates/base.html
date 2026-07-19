@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vibe | Connect</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <script>
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+</head>
+<body data-theme="dark">
+    <!-- Aurora Background -->
+    <div class="aurora-bg"><div class="aurora-blob"></div></div>
+    <!-- Mouse Glow -->
+    <div class="mouse-glow" id="mouse-glow"></div>
+    
+    <div class="app-layout {% if not user.is_authenticated %}auth-layout{% endif %}">
+        <!-- Desktop Sidebar -->
+        {% if user.is_authenticated %}
+        <aside class="sidebar">
+            <a href="{% url 'feed' %}" class="brand d-flex align-center gap-2 mb-4" style="text-decoration: none; color: var(--primary);">
+                <i data-lucide="zap"></i>
+                <h2>Vibe</h2>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="{% url 'feed' %}" class="nav-link">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i data-lucide="search"></i>
+                    <span>Explore</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i data-lucide="bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i data-lucide="bookmark"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="{% url 'profile' user.username %}" class="nav-link">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="{% url 'logout' %}" class="nav-link text-secondary" style="margin-top: auto;">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </a>
+                <button class="btn btn-ghost full-width mt-2" onclick="toggleTheme()">
+                    <i data-lucide="moon"></i> <span>Toggle Theme</span>
+                </button>
+            </nav>
+            
+            <button class="btn btn-primary full-width mt-4" style="padding: 1rem; border-radius: var(--radius-xl);">
+                Create Post
+            </button>
+        </aside>
+        {% endif %}
+
+        <!-- Main Feed / Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Right Panel (Trends / Search) -->
+        {% if user.is_authenticated %}
+        <aside class="right-panel">
+            <div class="input-group" style="position: relative;">
+                <div class="d-flex align-center gap-2" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0.5rem 1rem;">
+                    <i data-lucide="search" class="text-secondary"></i>
+                    <input type="text" id="search-input" placeholder="Search Vibe..." style="border: none; background: transparent; width: 100%; outline: none; color: var(--text-primary);">
+                </div>
+                <div id="search-results" class="hidden" style="position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); margin-top: 0.5rem; z-index: 50; overflow: hidden;"></div>
+            </div>
+            
+            <div class="card mt-4">
+                <h4>Trending Now</h4>
+                <!-- Trending topics placeholder -->
+                <p class="text-secondary mt-2">#Glassmorphism</p>
+                <p class="text-secondary mt-1">#Django</p>
+            </div>
+        </aside>
+        {% endif %}
+    </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    {% if user.is_authenticated %}
+    <nav class="bottom-nav">
+        <div class="nav-menu">
+            <a href="{% url 'feed' %}" class="nav-link"><i data-lucide="home"></i></a>
+            <a href="#" class="nav-link"><i data-lucide="search"></i></a>
+            <a href="#" class="nav-link" style="color: var(--primary);"><i data-lucide="plus-square"></i></a>
+            <a href="#" class="nav-link"><i data-lucide="heart"></i></a>
+            <a href="{% url 'profile' user.username %}" class="nav-link"><i data-lucide="user"></i></a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script>
+        const csrfToken = "{{ csrf_token }}";
+        lucide.createIcons(); // Initialize Lucide Icons
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+    </script>
+</body>
+</html>

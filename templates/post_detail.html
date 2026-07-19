@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="feed-container">
+    <div class="glass-card post-card">
+        <div class="post-header">
+            <div class="avatar-placeholder">{{ post.author.username.0|upper }}</div>
+            <div>
+                <a href="{% url 'profile' post.author.username %}" class="post-author">{{ post.author.username }}</a>
+                <span class="post-time">{{ post.created_at|timesince }} ago</span>
+            </div>
+        </div>
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+        <div class="post-footer">
+            <button class="like-btn {% if user_has_liked %}liked{% endif %}" onclick="toggleLike({{ post.id }})">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="{% if user_has_liked %}currentColor{% else %}none{% endif %}" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span id="like-count-{{ post.id }}">{{ post.likes.count }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h3>Comments ({{ post.comments.count }})</h3>
+        {% if user.is_authenticated %}
+        <div class="glass-card">
+            <form method="post" action="{% url 'add_comment' post.id %}">
+                {% csrf_token %}
+                <textarea name="content" placeholder="Add a comment..." required></textarea>
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">Reply</button>
+            </form>
+        </div>
+        {% endif %}
+        
+        <div class="comments-list">
+            {% for comment in post.comments.all %}
+            <div class="glass-card comment-card">
+                <strong><a href="{% url 'profile' comment.author.username %}">{{ comment.author.username }}</a></strong>
+                <span class="post-time">{{ comment.created_at|timesince }} ago</span>
+                <p>{{ comment.content }}</p>
+            </div>
+            {% empty %}
+            <p style="color: rgba(255,255,255,0.6);">No comments yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
