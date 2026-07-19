@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="feed-container">
+    <!-- Post Feed -->
+    <div class="posts-list" id="posts-list">
+        {% for post in posts %}
+        <div class="card mb-4 post-card" data-post-id="{{ post.id }}">
+            <div class="post-header d-flex justify-between align-center">
+                <div class="d-flex align-center gap-2">
+                    {% if post.author.avatar %}
+                        <img src="{{ post.author.avatar.url }}" alt="{{ post.author.username }}" class="avatar avatar-md">
+                    {% else %}
+                        <div class="avatar avatar-md d-flex align-center justify-center text-primary" style="background: var(--border); font-weight: 700;">
+                            {{ post.author.username.0|upper }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        <a href="{% url 'profile' post.author.username %}" class="post-author" style="color: var(--text-primary); font-weight: 600;">{{ post.author.username }}</a>
+                        <div class="post-time text-secondary" style="font-size: 0.8rem;">{{ post.created_at|timesince }} ago</div>
+                    </div>
+                </div>
+                <div class="post-options" style="position: relative;">
+                    <button class="btn btn-ghost" onclick="togglePostOptions({{ post.id }})">
+                        <i data-lucide="more-horizontal"></i>
+                    </button>
+                    <!-- Options Dropdown -->
+                    <div id="options-{{ post.id }}" class="dropdown-menu hidden" style="position: absolute; right: 0; top: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 10; min-width: 150px; padding: 0.5rem 0;">
+                        {% if post.author == user %}
+                        <button class="dropdown-item d-flex align-center gap-2 full-width btn-ghost" style="padding: 0.5rem 1rem; text-align: left; border-radius: 0;" onclick="editPost({{ post.id }})"><i data-lucide="edit-2"></i> Edit</button>
+                        <button class="dropdown-item d-flex align-center gap-2 full-width btn-ghost text-danger" style="padding: 0.5rem 1rem; text-align: left; border-radius: 0;" onclick="deletePost({{ post.id }})"><i data-lucide="trash-2"></i> Delete</button>
+                        {% else %}
+                        <button class="dropdown-item d-flex align-center gap-2 full-width btn-ghost" style="padding: 0.5rem 1rem; text-align: left; border-radius: 0;"><i data-lucide="flag"></i> Report</button>
+                        {% endif %}
+                        <button class="dropdown-item d-flex align-center gap-2 full-width btn-ghost" style="padding: 0.5rem 1rem; text-align: left; border-radius: 0;" onclick="copyLink('{{ post.slug }}')"><i data-lucide="link"></i> Copy Link</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-content mt-4" ondblclick="doubleClickLike({{ post.id }})" style="position: relative;">
+                <p>{{ post.content }}</p>
+                {% if post.image %}
+                <div class="post-image mt-4" style="border-radius: var(--radius-md); overflow: hidden;">
+                    <img src="{{ post.image.url }}" alt="Post image" style="width: 100%; height: auto; display: block;" loading="lazy">
+                </div>
+                {% endif %}
+                <!-- Heart animation overlay for double click -->
+                <div class="heart-overlay hidden" id="heart-overlay-{{ post.id }}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
+                    <i data-lucide="heart" class="text-danger" style="width: 80px; height: 80px; fill: currentColor; filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));"></i>
+                </div>
+            </div>
+
+            <div class="post-footer d-flex align-center justify-between mt-4" style="border-top: 1px solid var(--border); padding-top: 1rem;">
+                <div class="d-flex gap-4">
+                    <button class="btn btn-ghost like-btn {% if post.id in user_liked_posts %}liked text-danger{% endif %}" onclick="toggleLike({{ post.id }})">
+                        <i data-lucide="heart" {% if post.id in user_liked_posts %}style="fill: currentColor;"{% endif %}></i>
+                        <span id="like-count-{{ post.id }}">{{ post.likes.count }}</span>
+                    </button>
+                    <button class="btn btn-ghost comment-btn" onclick="openCommentSheet({{ post.id }})">
+                        <i data-lucide="message-circle"></i>
+                        <span id="comment-count-{{ post.id }}">{{ post.comments.count }}</span>
+                    </button>
+                    <button class="btn btn-ghost share-btn">
+                        <i data-lucide="send"></i>
+                    </button>
+                </div>
+                <button class="btn btn-ghost bookmark-btn" onclick="toggleBookmark({{ post.id }})">
+                    <i data-lucide="bookmark"></i>
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <div class="card text-center text-secondary">
+            <p>No posts yet. Be the first to share something!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Floating Action Button for Mobile -->
+<button class="fab btn btn-primary" onclick="openCreatePostModal()" style="position: fixed; bottom: 80px; right: 20px; width: 56px; height: 56px; padding: 0; border-radius: var(--radius-full); z-index: 900; box-shadow: var(--shadow-lg);">
+    <i data-lucide="plus"></i>
+</button>
+
+<!-- Create Post Modal -->
+<div id="createPostModal" class="modal-overlay hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1100; display: flex; align-items: center; justify-content: center;">
+    <div class="modal-content card" style="width: 90%; max-width: 500px; transform: scale(0.95); transition: transform 0.3s ease;">
+        <div class="d-flex justify-between align-center mb-4">
+            <h3>Create Post</h3>
+            <button class="btn btn-ghost" onclick="closeCreatePostModal()" type="button"><i data-lucide="x"></i></button>
+        </div>
+        <form id="createPostForm" method="post" action="{% url 'create_post' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea name="content" class="input" placeholder="What's on your mind, {{ user.username }}?" rows="4" required style="border: none; background: transparent; font-size: 1.1rem; resize: none;"></textarea>
+            <div class="d-flex justify-between align-center mt-4 pt-4" style="border-top: 1px solid var(--border);">
+                <div class="d-flex gap-2">
+                    <label for="image-upload" class="btn btn-ghost text-primary" style="cursor: pointer; padding: 0.5rem;">
+                        <i data-lucide="image"></i>
+                    </label>
+                    <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;">
+                    <button type="button" class="btn btn-ghost text-warning" style="padding: 0.5rem;"><i data-lucide="smile"></i></button>
+                </div>
+                <button type="submit" class="btn btn-primary">Publish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Comments Bottom Sheet -->
+<div id="commentsSheet" class="bottom-sheet hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1200; display: flex; align-items: flex-end;">
+    <div class="sheet-content card" style="width: 100%; border-radius: 24px 24px 0 0; transform: translateY(100%); transition: transform 0.3s ease; max-height: 80vh; display: flex; flex-direction: column;">
+        <div class="sheet-handle" style="width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 1rem;"></div>
+        <div class="d-flex justify-between align-center mb-4">
+            <h3>Comments</h3>
+            <button class="btn btn-ghost" onclick="closeCommentSheet()"><i data-lucide="x"></i></button>
+        </div>
+        <div id="comments-list" class="mb-4" style="flex: 1; overflow-y: auto;">
+            <!-- Comments loaded via AJAX -->
+        </div>
+        <form id="addCommentForm" class="d-flex gap-2" style="border-top: 1px solid var(--border); padding-top: 1rem;">
+            <input type="hidden" id="comment-post-id">
+            <input type="text" id="comment-input" class="input" placeholder="Write a comment..." required>
+            <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;"><i data-lucide="send"></i></button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .hidden { display: none !important; }
+    
+    .modal-overlay:not(.hidden) .modal-content {
+        transform: scale(1);
+    }
+    
+    .bottom-sheet:not(.hidden) .sheet-content {
+        transform: translateY(0);
+    }
+
+    .heart-explosion {
+        animation: heartExplosion 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    
+    @keyframes heartExplosion {
+        0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        15% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        30% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    }
+</style>
+{% endblock %}

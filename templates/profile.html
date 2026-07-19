@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="profile-container">
+    <div class="glass-card profile-header">
+        <div class="profile-info">
+            <div class="avatar-large">
+                {% if profile_user.avatar %}
+                    <img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}">
+                {% else %}
+                    {{ profile_user.username.0|upper }}
+                {% endif %}
+            </div>
+            <div class="profile-details">
+                <h2>{{ profile_user.username }}</h2>
+                <p class="bio">{{ profile_user.bio|default:"No bio yet." }}</p>
+                <div class="stats">
+                    <span><strong>{{ posts.count }}</strong> Posts</span>
+                    <span><strong id="followers-count">{{ profile_user.followers.count }}</strong> Followers</span>
+                    <span><strong>{{ profile_user.following.count }}</strong> Following</span>
+                </div>
+            </div>
+            {% if user.is_authenticated and user != profile_user %}
+            <div class="profile-actions">
+                <button id="follow-btn" class="btn {% if is_following %}btn-outline{% else %}btn-primary{% endif %}" onclick="toggleFollow('{{ profile_user.username }}')">
+                    {% if is_following %}Unfollow{% else %}Follow{% endif %}
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="posts-list">
+        {% for post in posts %}
+        <div class="glass-card post-card">
+            <div class="post-content">
+                <span class="post-time">{{ post.created_at|timesince }} ago</span>
+                <p>{{ post.content }}</p>
+            </div>
+            <div class="post-footer">
+                <span>{{ post.likes.count }} Likes</span>
+                <span>{{ post.comments.count }} Comments</span>
+                <a href="{% url 'post_detail' post.id %}" class="btn-outline btn-sm">View</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="glass-card"><p>No posts yet.</p></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
