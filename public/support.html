@@ -1,0 +1,461 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Quantum Support | Engineered for the Next Generation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #101417;
+            color: #e0e2e8;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+        .cyan-glow-hover:hover {
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "primary-container": "#00f0ff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary-fixed-variant": "#474646",
+                        "on-surface": "#e0e2e8",
+                        "surface-container": "#1c2024",
+                        "tertiary-container": "#d7d9da",
+                        "surface-bright": "#36393e",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#101417",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "on-primary-container": "#006970",
+                        "on-primary": "#00363a",
+                        "tertiary": "#f4f6f7",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-primary-fixed": "#002022",
+                        "primary": "#dbfcff",
+                        "on-error": "#690005",
+                        "outline": "#849495",
+                        "surface-container-lowest": "#0b0f12",
+                        "on-background": "#e0e2e8",
+                        "surface-container-low": "#181c20",
+                        "on-tertiary-fixed-variant": "#444748",
+                        "on-surface-variant": "#b9cacb",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "background": "#101417",
+                        "primary-fixed": "#7df4ff",
+                        "surface-container-highest": "#323539",
+                        "secondary": "#c9c6c5",
+                        "outline-variant": "#3b494b",
+                        "on-secondary-container": "#bab8b7",
+                        "on-secondary": "#313030",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "on-tertiary-container": "#5c5f60",
+                        "surface-dim": "#101417",
+                        "primary-fixed-dim": "#00dbe9",
+                        "secondary-container": "#4a4949",
+                        "on-primary-fixed-variant": "#004f54",
+                        "inverse-primary": "#006970",
+                        "surface-tint": "#00dbe9",
+                        "inverse-surface": "#e0e2e8",
+                        "surface-variant": "#323539",
+                        "on-tertiary": "#2e3132",
+                        "inverse-on-surface": "#2d3135",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-container-high": "#272a2e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "xs": "8px",
+                        "xl": "80px",
+                        "sm": "16px",
+                        "base": "4px",
+                        "md": "24px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header / TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.05)]">
+<div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-container"><a href="index.html">Quantum Store</a></div>
+<div class="hidden md:flex space-x-lg">
+
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="index.html#products-container">Latest Drops</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="category.html?c=quantum">Quantum Collection</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="category.html?c=hardware">Hardware</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="support.html">Support</a>
+</div>
+<div class="flex items-center space-x-sm">
+<button onclick="window.location.href='cart.html'" class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors p-2 active:scale-95 relative" data-icon="shopping_cart">
+    shopping_cart
+    <span class="absolute top-0 right-0 bg-primary text-on-primary rounded-full w-5 h-5 flex items-center justify-center text-xs cart-count">0</span>
+</button>
+<button onclick="window.location.href='login.html'" class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors p-2 active:scale-95" data-icon="account_circle">account_circle</button>
+</div>
+</div>
+</nav>
+<!-- Hero / Search Section -->
+<section class="relative pt-xl pb-lg px-gutter max-w-container-max mx-auto mt-20">
+<div class="absolute inset-0 z-0 overflow-hidden opacity-30 pointer-events-none">
+
+</div>
+<div class="relative z-10 text-center space-y-md py-xl">
+<span class="inline-block px-4 py-1 rounded-full bg-primary-container/10 text-primary-container font-label-sm text-label-sm border border-primary-container/20">SYSTEM SUPPORT CENTER</span>
+<h1 class="font-display-lg text-headline-lg md:text-display-lg tracking-tighter text-on-surface">How can we assist your <span class="text-primary-container">Quantum journey</span> today?</h1>
+<div class="max-w-2xl mx-auto mt-lg">
+<div class="glass-panel rounded-xl p-base flex items-center shadow-xl group transition-all duration-300 focus-within:ring-2 focus-within:ring-primary-container/50">
+<span class="material-symbols-outlined px-md text-on-surface-variant group-focus-within:text-primary-container" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-md placeholder:text-on-surface-variant/50 font-body-lg text-body-lg" placeholder="Find answers (e.g., Quantum core initialization error...)" type="text">
+<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-lg mr-base font-label-md text-label-md hover:brightness-110 active:scale-95 transition-all">Search</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<main class="px-gutter max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-lg pb-xl">
+<!-- Sidebar Navigation (Quick Links) -->
+<aside class="lg:col-span-3 space-y-md">
+<div class="glass-panel p-md rounded-xl space-y-sm">
+<h3 class="font-label-md text-label-md text-primary-container uppercase tracking-widest mb-md">Quick Solutions</h3>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-white/5 transition-all group" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Track My Rig</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-white/5 transition-all group" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="verified">verified</span>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Register Warranty</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-white/5 transition-all group" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="update">update</span>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Firmware Updates</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-white/5 transition-all group" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="forum">forum</span>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface">Community Forum</span>
+</a>
+</div>
+<div class="relative rounded-xl overflow-hidden aspect-[4/5] glass-panel group">
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A high-tech cinematic photography of a technician wearing futuristic VR goggles and gloves working on a glowing cyan computer motherboard in a dark, clean-room laboratory." style="background-image: url('assets/Customer_support_holographic_inter_202607191442.jpeg')"></div>
+<div class="absolute bottom-0 left-0 p-md z-20 space-y-xs">
+<p class="font-label-sm text-label-sm text-primary-container">White Glove Service</p>
+<h4 class="font-headline-md text-headline-md leading-tight">Professional Installation</h4>
+<button class="mt-sm text-label-md font-label-md border-b border-primary-container text-primary-container py-1">Learn More</button>
+</div>
+</div>
+</aside>
+<!-- FAQ Sections -->
+<div class="lg:col-span-9 space-y-lg">
+<!-- Category Tabs (Desktop Only) -->
+<div class="flex gap-sm overflow-x-auto pb-4 custom-scrollbar">
+<button class="whitespace-nowrap px-md py-sm rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md">All Articles</button>
+<button class="whitespace-nowrap px-md py-sm rounded-lg glass-panel hover:bg-white/10 transition-all font-label-md text-label-md">Shipping</button>
+<button class="whitespace-nowrap px-md py-sm rounded-lg glass-panel hover:bg-white/10 transition-all font-label-md text-label-md">Technical Specs</button>
+<button class="whitespace-nowrap px-md py-sm rounded-lg glass-panel hover:bg-white/10 transition-all font-label-md text-label-md">Warranty</button>
+<button class="whitespace-nowrap px-md py-sm rounded-lg glass-panel hover:bg-white/10 transition-all font-label-md text-label-md">Returns</button>
+</div>
+<!-- FAQ Groups -->
+<div class="space-y-md">
+<!-- Shipping Section -->
+<div class="space-y-sm">
+<div class="flex items-center gap-sm text-primary-container mb-sm">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<h2 class="font-headline-md text-headline-md">Shipping &amp; Delivery</h2>
+</div>
+<div class="space-y-sm">
+<details class="glass-panel rounded-xl group overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface group-open:text-primary-container">What is the standard delivery time for Quantum Kits?</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant font-body-md text-body-md border-t border-white/5 pt-md">
+                                All Quantum Kits undergo a 48-hour rigorous stability testing phase before dispatch. Standard international shipping takes 3-5 business days via our secure sub-orbital carrier network.
+                            </div>
+</details>
+<details class="glass-panel rounded-xl group overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface group-open:text-primary-container">Do you offer climate-controlled transport?</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant font-body-md text-body-md border-t border-white/5 pt-md">
+                                Yes, all high-tier processors and quantum-stable components are shipped in pressurized, electromagnetic-shielded, and temperature-stabilized containers to ensure zero degradation during transit.
+                            </div>
+</details>
+</div>
+</div>
+<!-- Technical Specs Section -->
+<div class="space-y-sm pt-md">
+<div class="flex items-center gap-sm text-primary-container mb-sm">
+<span class="material-symbols-outlined" data-icon="memory">memory</span>
+<h2 class="font-headline-md text-headline-md">Technical Specifications</h2>
+</div>
+<div class="space-y-sm">
+<details class="glass-panel rounded-xl group overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface group-open:text-primary-container">Compatibility with legacy PCIe standards?</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant font-body-md text-body-md border-t border-white/5 pt-md">
+                                While our hardware is optimized for PCIe 6.0 and beyond, our bridge controllers maintain 100% backward compatibility with PCIe 4.0 and 5.0 slots, albeit with reduced bandwidth throughput.
+                            </div>
+</details>
+<details class="glass-panel rounded-xl group overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface group-open:text-primary-container">Power supply requirements for Quantum Core?</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant font-body-md text-body-md border-t border-white/5 pt-md">
+                                The Quantum Core requires a minimum 1200W ATX 3.0 compliant PSU. We recommend our Platinum-certified Neutron Flux unit for optimal thermal and electrical stability.
+                            </div>
+</details>
+</div>
+</div>
+<!-- Warranty Section -->
+<div class="space-y-sm pt-md">
+<div class="flex items-center gap-sm text-primary-container mb-sm">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<h2 class="font-headline-md text-headline-md">Warranty &amp; Protection</h2>
+</div>
+<div class="space-y-sm">
+<details class="glass-panel rounded-xl group overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface group-open:text-primary-container">What does the "Lifetime Performance Guarantee" cover?</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-md pb-md text-on-surface-variant font-body-md text-body-md border-t border-white/5 pt-md">
+                                We guarantee that your processor will maintain at least 98% of its factory-rated clock speed for 10 years, or we will replace the unit with the current equivalent model at no cost.
+                            </div>
+</details>
+</div>
+</div>
+</div>
+<!-- Contact Section -->
+<section class="pt-lg">
+<div class="glass-panel rounded-2xl p-lg space-y-lg border-primary-container/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="support_agent">support_agent</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Can't find the answer?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Our specialized support engineers are available 24/7 to help you optimize your Quantum infrastructure.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md relative z-10">
+<!-- Live Chat -->
+<div class="glass-panel p-md rounded-xl hover:bg-primary-container/5 transition-all group border-primary-container/0 hover:border-primary-container/30 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container mb-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-xs">Live Chat</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Instant response from a human engineer.</p>
+<p class="mt-md font-label-sm text-label-sm text-primary-container flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500 inline-block animate-pulse"></span> Available Now
+                            </p>
+</div>
+<!-- Email -->
+<div class="glass-panel p-md rounded-xl hover:bg-primary-container/5 transition-all group border-primary-container/0 hover:border-primary-container/30 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container mb-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-xs">Email Support</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Detailed technical resolutions within 4h.</p>
+<p class="mt-md font-label-sm text-label-sm text-on-surface-variant/50 uppercase tracking-tighter">support@quantum.tech</p>
+</div>
+<!-- Ticket -->
+<div class="glass-panel p-md rounded-xl hover:bg-primary-container/5 transition-all group border-primary-container/0 hover:border-primary-container/30 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container mb-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-xs">Open a Ticket</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Formal RMA and hardware tracking.</p>
+<p class="mt-md font-label-sm text-label-sm text-on-surface-variant/50 uppercase tracking-tighter">Submit Request</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ticket System Placeholder / Form -->
+<section class="glass-panel rounded-2xl p-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Technical Support Ticket</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Initialize a new diagnostics request</p>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-label-md font-label-md text-on-surface-variant">Priority:</span>
+<select class="bg-surface-container-highest border-none rounded-lg text-on-surface font-label-md focus:ring-primary-container cursor-pointer">
+<option>Standard</option>
+<option>Urgent (Production Down)</option>
+<option>Mission Critical</option>
+</select>
+</div>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase ml-1">Component Serial Number</label>
+<input class="w-full bg-[#0A0A0A] border-white/10 rounded-lg text-on-surface focus:border-primary-container transition-all p-md" placeholder="QNT-XXXX-XXXX" type="text">
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase ml-1">Issue Category</label>
+<select class="w-full bg-[#0A0A0A] border-white/10 rounded-lg text-on-surface focus:border-primary-container transition-all p-md">
+<option>Kernel Panics</option>
+<option>Thermal Instability</option>
+<option>Memory Leak</option>
+<option>I/O Errors</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase ml-1">Log Description</label>
+<textarea class="w-full bg-[#0A0A0A] border-white/10 rounded-lg text-on-surface focus:border-primary-container transition-all p-md" placeholder="Paste error logs or describe the anomaly..." rows="4"></textarea>
+</div>
+<div class="md:col-span-2 flex justify-end">
+<button class="bg-primary-container text-on-primary-container px-xl py-md rounded-lg font-headline-md text-label-md hover:brightness-110 shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all active:scale-95" type="submit">Submit Ticket</button>
+</div>
+</form>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-white/5 mt-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg py-xl px-gutter max-w-container-max mx-auto">
+<div class="space-y-md">
+<div class="font-headline-md text-headline-md text-primary-container font-bold tracking-tighter">Quantum Store</div>
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Quantum Store. Engineered for the Next Generation.</p>
+</div>
+<div class="flex flex-col space-y-sm">
+<h5 class="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-sm">Explore</h5>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="category.html?c=hardware">Processors</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="category.html?c=hardware">Graphics</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="category.html?c=hardware">Storage</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h5 class="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-sm">Support</h5>
+<a class="font-label-md text-label-md text-primary-container transition-all" href="support.html">Help Center</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Warranty</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Returns</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h5 class="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-sm">Legal</h5>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Shipping Info</a>
+</div>
+</div>
+</footer>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple search highlight simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const questions = document.querySelectorAll('details summary span');
+            
+            questions.forEach(q => {
+                const parent = q.closest('details');
+                if (term.length > 2 && q.textContent.toLowerCase().includes(term)) {
+                    parent.classList.add('ring-1', 'ring-primary-container');
+                } else {
+                    parent.classList.remove('ring-1', 'ring-primary-container');
+                }
+            });
+        });
+
+        // Form Submission feedback
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'Transmitting...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = 'Ticket Synchronized';
+                btn.classList.replace('bg-primary-container', 'bg-green-500');
+                btn.classList.replace('text-on-primary-container', 'text-white');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.replace('bg-green-500', 'bg-primary-container');
+                    btn.classList.replace('text-white', 'text-on-primary-container');
+                    btn.disabled = false;
+                    form.reset();
+                }, 3000);
+            }, 1500);
+        });
+
+        // Sticky Nav Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-surface/95');
+                nav.classList.remove('bg-surface/80');
+            } else {
+                nav.classList.add('bg-surface/80');
+                nav.classList.remove('bg-surface/95');
+            }
+        });
+    </script>
+<script src="app.js"></script>
+</body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Store - Homepage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1c2024",
+                        "surface-container-lowest": "#0b0f12",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-primary-fixed": "#002022",
+                        "surface-tint": "#00dbe9",
+                        "secondary-container": "#4a4949",
+                        "surface": "#101417",
+                        "outline-variant": "#3b494b",
+                        "surface-container-low": "#181c20",
+                        "outline": "#849495",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "tertiary-fixed": "#e1e3e4",
+                        "error-container": "#93000a",
+                        "on-secondary": "#313030",
+                        "tertiary": "#f4f6f7",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#d7d9da",
+                        "surface-container-high": "#272a2e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-surface-variant": "#b9cacb",
+                        "primary-container": "#00f0ff",
+                        "on-secondary-fixed-variant": "#474646",
+                        "primary-fixed": "#7df4ff",
+                        "on-tertiary": "#2e3132",
+                        "background": "#101417",
+                        "inverse-surface": "#e0e2e8",
+                        "secondary": "#c9c6c5",
+                        "surface-bright": "#36393e",
+                        "inverse-on-surface": "#2d3135",
+                        "primary": "#dbfcff",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-variant": "#323539",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#444748",
+                        "on-primary": "#00363a",
+                        "on-secondary-container": "#bab8b7",
+                        "on-tertiary-container": "#5c5f60",
+                        "inverse-primary": "#006970",
+                        "surface-dim": "#101417",
+                        "on-primary-container": "#006970",
+                        "on-surface": "#e0e2e8",
+                        "on-background": "#e0e2e8",
+                        "surface-container-highest": "#323539",
+                        "on-primary-fixed-variant": "#004f54",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "primary-fixed-dim": "#00dbe9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "xl": "80px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 0px 30px rgba(0, 240, 255, 0.05);
+        }
+        .btn-primary {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .card-hover:hover {
+            box-shadow: 0px 0px 40px rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #FFFFFF 0%, #00f0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="sticky bg-background/80 dark:bg-background/80 backdrop-blur-xl docked full-width top-0 z-50 border-b border-outline-variant/20 shadow-md">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">
+                Quantum <span class="text-primary-container">Store</span>
+</div>
+<div class="hidden md:flex space-x-gutter items-center text-primary-fixed-dim dark:text-primary-fixed-dim font-label-md text-label-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Latest Drops</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Quantum Collection</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Hardware</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Support</a>
+</div>
+<div class="flex items-center space-x-md">
+<div class="hidden md:block relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-[#0A0A0A] border border-outline-variant rounded-full py-2 pl-10 pr-4 text-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none w-64 placeholder-on-surface-variant" placeholder="Search products..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/10 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/10 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative w-full h-[819px] flex items-center justify-center overflow-hidden max-w-container-max mx-auto mt-lg rounded-3xl border border-outline-variant/20">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-resolution macro shot of a sleek, futuristic quantum device glowing with subtle cyan energy. The lighting is dramatic, high-contrast, and emphasizes the premium textures of matte black metal and polished glass. The scene conveys a sense of cutting-edge technology and luxury, set against a dark, minimal background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLgcQZQUTB4eR7qC1OeOILir9aNtPU2ErfhG7tvtGMcSTdDdnGjju6Cw4CyZa2BV1HoRg5yfPj5RfXjX6k5ZTcBs2HvtYkvRjMBMUO0Am9hDlDnRWdgKQ8wnvpHmWcPiD0sR2xRBrsQVTF2NbTPHpj4svpdFPtcddU5dvhAmPp2TtMld-z0Uwy8D3xUuWr9omKBPGh963QG1UxxvLtBkvNb6O79o3GVnSqjifBkZ9-rv5o6ulUlBs6gQMDlg9qWlwFEqsY60i4pght')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+<div class="relative z-10 text-center flex flex-col items-center p-xl glass-panel rounded-2xl max-w-3xl mx-sm">
+<h1 class="font-display-lg text-display-lg gradient-text mb-sm uppercase tracking-tight">Next-Gen Tech</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Discover the future with our exclusive quantum collection. Engineered for absolute precision.</p>
+<button class="btn-primary font-label-md text-label-md px-xl py-md rounded-full uppercase tracking-wider font-bold">Shop Now</button>
+</div>
+</section>
+<!-- Featured Categories (Bento Grid) -->
+<section class="max-w-container-max mx-auto px-lg py-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-lg">Featured Categories</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter h-auto md:h-[500px]">
+<div class="md:col-span-2 glass-panel rounded-2xl relative overflow-hidden group card-hover cursor-pointer h-64 md:h-auto">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="A high-end desktop hardware setup featuring glowing cyan liquid cooling tubes and sleek black metal components. The lighting is moody and technical, emphasizing the power and sophistication of the rig. The aesthetic is dark mode, premium, and futuristic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOHx3eyKMUvaMAtjy7pkoKSDijE75PjleINFUiRw56onqP1bYMwqltQmipQ_dE7UsahmcEwxFTaDSrINcJ5Z5FQVLd6u-WY2AeNNzifDE6psO9IebOFh3Qy8XhMPOydKYg3uTB_gIOxarwroe6tkAsSqKRecdDfAEnRQH_f3F6rSHrNeLJKx03Vb7KihMalidSs9HBRCstMdspzxricH8QslnzXpovfPmnXrE9nhaIAdlrjJfMADfpoFTPmgTfYkbZHs9EuIYjkKxM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Hardware</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Unleash quantum processing power.</p>
+</div>
+<div class="absolute top-md right-md bg-primary-container/10 text-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm border border-primary-container/20">
+                        Pro Grade
+                    </div>
+</div>
+<div class="grid grid-rows-2 gap-gutter h-full">
+<div class="glass-panel rounded-2xl relative overflow-hidden group card-hover cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="A sleek, minimalist smart ring resting on a dark reflective surface. A faint cyan light emits from a subtle seam on the ring. The focus is sharp, highlighting the premium titanium finish. The mood is high-tech and luxurious." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0drgrG1y4uSvIoMqQud_iPc7OTstD10kZ5jV5KMbHbPj64tSpNzUi7NZ9I84eoqmRHF7fkZDVuJsfkgdyvBgivz03gVAobNIGpFn6AecYUEFaKKW39ZvuJCpXpj5rqOEoMyPUVyzkB_-Wz46RfBj5Zd2wcjU5P5zJ1GTm5A8vrG15g0hy6SzGb4GCdNEjcpQtS_ZdGOaNfB5-btW59llo1NcZb2BZTD8o3SkpQNvsjJ_ejidiafQnUBUiE1QP4WE0uREANBy9fquD')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Wearables</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Seamless integration.</p>
+</div>
+</div>
+<div class="glass-panel rounded-2xl relative overflow-hidden group card-hover cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="Premium, minimalist over-ear headphones floating in a dark void. They have matte black earcups with a glowing cyan accent ring. The lighting is soft but precise, showcasing the high-quality materials and futuristic design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHCwNMTIkFbx14jN8AITcRdpw_gX_lhfyBV6eX5P51olJcegakaCzY6Vm_h2w6f1U6V3dbx8yD-Ct55kz-y8lsjAWfGPiFoKizgnhpBrrXan_Hbzhn52LWcNaCqGX9zSVa2sf3nW6Oc6A1XyEPnoWIA_7F37ibAvXAMu8GojtcGW0zqc6inOUCtHmtFbcpm8OfTMF77kLIqGML3DbCbJ11MCyE3QnQ_L0WcoBrdHyNKRII8P0Nt3OEQ45yLzUbVOHP7_fyXkfU79ii')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Pro Audio</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Absolute fidelity.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Drops -->
+<section class="max-w-container-max mx-auto px-lg py-xl border-t border-outline-variant/10">
+<div class="flex justify-between items-end mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Latest Drops</h2>
+<a class="font-label-md text-label-md text-primary-container hover:text-primary transition-colors flex items-center" href="#">
+                    View All <span class="material-symbols-outlined ml-xs text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product 1 -->
+<div class="glass-panel rounded-xl p-md group flex flex-col h-full card-hover relative">
+<div class="absolute top-md left-md z-10 bg-primary-container/10 text-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm border border-primary-container/20 backdrop-blur-md">
+                        New
+                    </div>
+<div class="aspect-square rounded-lg overflow-hidden mb-md relative bg-[#1A1D1E] flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed 3D render of a futuristic mechanical keyboard with translucent keycaps and vivid cyan backlighting. The keyboard sits on a dark, textured desk pad. The lighting is cinematic, emphasizing the sharp angles and premium build quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAYDR96TV35KUknjKYehvCJEpWejmcetFJBOJYm-xz2NQaN7h6mdFD3pPj78azxs1DIwGBcw-LNXsA9MwCSmqn0LzMlSBRmuDTrDFHlODxhn9jxrn_KxNIacUy9rAwbDa3vF3R_ZIc-wC1M17l8fYAGmHW0qv6WEB9z93Wefd04g4md0_FK8KKXiicyYcZg6Fj5fBMCi_Pzc-ZPQXz-T3ZtypnO2_JCItzYtf0Xs85VcJhHXl7EtYSyh8XFY6tnwba98kiEPA7XFva"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Q-Board V2</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">Tactile quantum switches.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-label-md text-label-md text-primary-fixed-dim">$249.00</span>
+<button class="bg-surface-variant/50 hover:bg-primary-container hover:text-black text-on-surface p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="glass-panel rounded-xl p-md group flex flex-col h-full card-hover relative">
+<div class="aspect-square rounded-lg overflow-hidden mb-md relative bg-[#1A1D1E] flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist, high-tech wireless mouse with a matte graphite finish and a sleek, ergonomic design. A subtle cyan light pulses from the logo. The background is a dark, smooth surface with soft, diffused lighting highlighting the mouse's curves." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADI8gz8L_9s4Tgt3e1LCuJ3hRwsTb_dcpHl8KlQZRGz7mxS9MDvg7W10BSZg6gVExbSQGCWAJESu3E0ams8pQuq6-43rklXpAGN4dVu38hu2V6Ebqeurp2vJ2nZT-RzMs-ELwvdZuV0r-dpD5MkWCeZbXfaoyNOqDi7d6L0TvGk3E4hARkLRoTTIPnb5PKrch_sz4huleLWQoE3oj6FEWwrgc2-Occcgot6Q4RHbdt19FfzcWCIJ7EikabdWtMmGMsWW0jT1aqXWgi"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Neural Mouse</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">Zero latency tracking.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-label-md text-label-md text-primary-fixed-dim">$129.00</span>
+<button class="bg-surface-variant/50 hover:bg-primary-container hover:text-black text-on-surface p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="glass-panel rounded-xl p-md group flex flex-col h-full card-hover relative">
+<div class="aspect-square rounded-lg overflow-hidden mb-md relative bg-[#1A1D1E] flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A pair of sleek, augmented reality glasses with dark tinted lenses and thin, angular frames made of carbon fiber. A faint, holographic cyan interface reflects in one of the lenses. The lighting is studio-style, sharp and dramatic against a pitch-black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKBgbmyEFhfCwvYsAoDcxu83hugZV3q6QnC9ptZ8VyD2TBLN1EqVaje_zvA3aUxHQXapWYT1xmTvLfpGE4T4h0adHR_-vI4g9ItnSGd9wdffplDNG_YdGui5BlCCijgbt-7Nz8sQmK4GLTzJprewQPmEhbitjJoVkpq9sqRxsWBNjTf7sApERxfhKTDvsvkOCzggVk2j5GHxtt068BublL-UGeXIIwBAd8Ey0c50Cz9PtUEIedIr9ic7wjSl0u8SNudy4kaWBbc5UC"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Vision AR</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">Holographic overlay.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-label-md text-label-md text-primary-fixed-dim">$599.00</span>
+<button class="bg-surface-variant/50 hover:bg-primary-container hover:text-black text-on-surface p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="glass-panel rounded-xl p-md group flex flex-col h-full card-hover relative">
+<div class="absolute top-md left-md z-10 bg-primary-container/10 text-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm border border-primary-container/20 backdrop-blur-md">
+                        Exclusive
+                    </div>
+<div class="aspect-square rounded-lg overflow-hidden mb-md relative bg-[#1A1D1E] flex items-center justify-center">
+<img class="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A compact, heavy metallic audio interface device with machined aluminum knobs and a central glowing cyan ring indicator. It sits on a dark studio desk. The lighting highlights the brushed metal texture and precise engineering of the device." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4QMUGjq8WIZTvEY_gq1TacU06Ig9YmJaWBof-GLVa29h5g89s8uv5BcgWaIlSJTdvLJgSGyAibAwOyk_NAkPa7U9HgT7IWRd9WtePsNkjHF-Mv3rhSosodETYDWV8yXAWZEd7-B1dZBHLLGVvviq8ENqZJAVOhGG6iyrV2fpJMZ0ibxrGG6VQf1AoVprbXl6rhiSfT6plKbItjr4WeR_pjbo-VZazEfwgqGwYbYMdg1nMR0hHrghc4eTWuh0_d1bZ06j4g0ZFb1y0"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Sonic Core</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md flex-grow">Studio grade DAC.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-label-md text-label-md text-primary-fixed-dim">$349.00</span>
+<button class="bg-surface-variant/50 hover:bg-primary-container hover:text-black text-on-surface p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="max-w-container-max mx-auto px-lg py-xl my-xl">
+<div class="glass-panel rounded-3xl p-xl flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-container/5 mix-blend-overlay"></div>
+<div class="relative z-10 md:w-1/2 mb-lg md:mb-0">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Stay Ahead of the Curve</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Subscribe to get exclusive access to new drops and quantum insights.</p>
+</div>
+<div class="relative z-10 md:w-1/2 flex w-full max-w-md">
+<input class="flex-grow bg-[#0A0A0A] border border-outline-variant rounded-l-full py-md pl-lg pr-4 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none placeholder-on-surface-variant" placeholder="Enter your email" type="email"/>
+<button class="btn-primary font-label-md text-label-md px-lg py-md rounded-r-full font-bold uppercase tracking-wide border-y border-r border-primary-container">Subscribe</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width bottom-0 border-t border-outline-variant/10 flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-xl max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-on-surface mb-md md:mb-0 font-bold">
+                Quantum <span class="text-primary-container">Store</span>
+</div>
+<div class="flex flex-wrap justify-center space-x-gutter mb-md md:mb-0 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Shipping</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Newsletter</a>
+</div>
+<div class="font-body-md text-body-md text-primary dark:text-primary-fixed-dim text-center md:text-right">
+                © 2024 Quantum Store. Engineered for the future.
+            </div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Store - Latest Drops</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1c2024",
+                        "surface-container-lowest": "#0b0f12",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-primary-fixed": "#002022",
+                        "surface-tint": "#00dbe9",
+                        "secondary-container": "#4a4949",
+                        "surface": "#101417",
+                        "outline-variant": "#3b494b",
+                        "surface-container-low": "#181c20",
+                        "outline": "#849495",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "tertiary-fixed": "#e1e3e4",
+                        "error-container": "#93000a",
+                        "on-secondary": "#313030",
+                        "tertiary": "#f4f6f7",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#d7d9da",
+                        "surface-container-high": "#272a2e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-surface-variant": "#b9cacb",
+                        "primary-container": "#00f0ff",
+                        "on-secondary-fixed-variant": "#474646",
+                        "primary-fixed": "#7df4ff",
+                        "on-tertiary": "#2e3132",
+                        "background": "#101417",
+                        "inverse-surface": "#e0e2e8",
+                        "secondary": "#c9c6c5",
+                        "surface-bright": "#36393e",
+                        "inverse-on-surface": "#2d3135",
+                        "primary": "#dbfcff",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-variant": "#323539",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#444748",
+                        "on-primary": "#00363a",
+                        "on-secondary-container": "#bab8b7",
+                        "on-tertiary-container": "#5c5f60",
+                        "inverse-primary": "#006970",
+                        "surface-dim": "#101417",
+                        "on-primary-container": "#006970",
+                        "on-surface": "#e0e2e8",
+                        "on-background": "#e0e2e8",
+                        "surface-container-highest": "#323539",
+                        "on-primary-fixed-variant": "#004f54",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "primary-fixed-dim": "#00dbe9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "xl": "80px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        
+        .glass-panel {
+            background: rgba(26, 29, 30, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.02);
+        }
+        
+        .glass-panel:hover {
+            border-color: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+
+        .btn-primary {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-fixed');
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .text-glow { text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-xl docked full-width top-0 z-50 border-b border-outline-variant/20 shadow-md sticky">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2" href="#">
+<span>Quantum</span><span class="text-primary-fixed-dim dark:text-primary-fixed-dim">Store</span>
+</a>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex gap-md items-center">
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1 active" href="#">Latest Drops</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-surface-variant/10 px-2 py-1 rounded" href="#">Quantum Collection</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-surface-variant/10 px-2 py-1 rounded" href="#">Hardware</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-surface-variant/10 px-2 py-1 rounded" href="#">Support</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 p-2 hover:bg-surface-variant/10 rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="hidden md:flex items-center gap-2 text-on-surface-variant font-label-md text-label-md mr-4">
+<span>Welcome, User</span>
+<a class="hover:text-primary" href="#">Logout</a>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 p-2 hover:bg-surface-variant/10 rounded-full relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary-container text-on-primary-fixed text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">1</span>
+</button>
+<button class="md:hidden text-on-surface-variant p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter md:px-lg py-lg flex flex-col md:flex-row gap-lg">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 space-y-md hidden md:block">
+<div>
+<h3 class="font-headline-md text-headline-md mb-md text-on-surface">Filters</h3>
+<!-- Category Filter -->
+<div class="mb-sm border-b border-outline-variant/30 pb-sm">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-xs">Category</h4>
+<ul class="space-y-xs font-body-md text-body-md text-secondary">
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-checkbox bg-surface border-outline-variant rounded text-primary-container focus:ring-primary-container focus:ring-offset-background" type="checkbox"/> Core Processors</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-checkbox bg-surface border-outline-variant rounded text-primary-container focus:ring-primary-container focus:ring-offset-background" type="checkbox"/> Memory Modules</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-checkbox bg-surface border-outline-variant rounded text-primary-container focus:ring-primary-container focus:ring-offset-background" type="checkbox"/> Storage Drives</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-checkbox bg-surface border-outline-variant rounded text-primary-container focus:ring-primary-container focus:ring-offset-background" type="checkbox"/> Cooling Systems</label></li>
+</ul>
+</div>
+<!-- Price Filter -->
+<div class="mb-sm border-b border-outline-variant/30 pb-sm">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-xs">Price Range</h4>
+<div class="flex items-center gap-2">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded px-2 py-1 text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" placeholder="Min" type="text"/>
+<span class="text-outline-variant">-</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded px-2 py-1 text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" placeholder="Max" type="text"/>
+</div>
+</div>
+<!-- Availability Filter -->
+<div class="mb-sm">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-xs">Availability</h4>
+<ul class="space-y-xs font-body-md text-body-md text-secondary">
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-radio bg-surface border-outline-variant text-primary-container focus:ring-primary-container focus:ring-offset-background" name="availability" type="radio"/> In Stock</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="form-radio bg-surface border-outline-variant text-primary-container focus:ring-primary-container focus:ring-offset-background" name="availability" type="radio"/> Pre-order</label></li>
+</ul>
+</div>
+</div>
+</aside>
+<!-- Product Grid Area -->
+<div class="flex-grow">
+<!-- Header & Sorting -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-sm">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2 tracking-tight">Latest Drops</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Discover the bleeding edge of quantum hardware.</p>
+</div>
+<div class="flex items-center gap-2 w-full md:w-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">Sort by:</span>
+<select class="w-full md:w-auto bg-surface-container-low border border-outline-variant rounded-md px-3 py-2 text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none appearance-none cursor-pointer">
+<option>Featured</option>
+<option>Newest Arrivals</option>
+<option>Price: High to Low</option>
+<option>Price: Low to High</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Product Card 1 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer flex flex-col h-full relative transition-all duration-300">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-primary-container/10 text-primary-fixed font-label-sm text-label-sm px-2 py-1 rounded-full border border-primary-container/20 backdrop-blur-md">NEW</span>
+</div>
+<div class="h-48 w-full bg-surface-container-highest flex items-center justify-center p-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent z-0"></div>
+<img class="object-contain h-full w-full z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" data-alt="A highly detailed, studio-lit photograph of a futuristic quantum processor chip. It has a sleek, black metallic casing with glowing cyan circuit pathways. The object is floating slightly above a dark, reflective surface in a minimalist environment, emitting a soft, cool light. High-end product photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD86FDc2BexTTRINAtoQ60sqVv-fPFdBoWuTpe6es5OzF68DNN7UHzHvlACV7HyID_N-BBF6XB-hajiQvwWkt4_LwcFdabUHwtWaUU3pjNT-XK9XiTjbfM2uIXlFM_dOL3Zy7fmGbHCav6_5GkPtZ7UtGClSnIGIWrp279JOAwya1bRoa2Z7LFropHox4C6ish7ZFwMqaJ9u9L70foW-rJ4E4tKAzSunF0c6Z0D3vMUK04bxT19XBHZXdAmJDIlLcQvX_plP7h7J4CN"/>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1 group-hover:text-primary-fixed-dim transition-colors">Q-Core X9</h2>
+<p class="font-body-sm text-body-md text-on-surface-variant mb-4 line-clamp-2">Next-generation quantum processing unit with 128 entangled qubits for unparalleled computational fidelity.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface font-bold text-glow">$1,299</span>
+<button class="btn-primary font-label-md text-label-md px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
+                                Add <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer flex flex-col h-full relative transition-all duration-300">
+<div class="h-48 w-full bg-surface-container-highest flex items-center justify-center p-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent z-0"></div>
+<img class="object-contain h-full w-full z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" data-alt="A detailed 3D render of a high-performance memory module stick. It features a matte graphite heatsink with sharp, angular, futuristic design elements and subtle, pulsating cyan LED strips along the top edge. Set against a pure black background with dramatic rim lighting emphasizing its premium build." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMp5Mwk584c3NP1ouoMcNDw_VleB55Wfos_0duKSyFYSINwVIo5bXXJhqNalpTTAS80WBgOZiNE04MtYfd7xdZvbm2ELq7Hb7I2kbudE41C6kt2giQqTh8dic8sYYII_BXWYwhUlYycRqY251ylidSOKpj3b0uhVa_bD8bB89dzBRODb7hOIg80cVV-kR8FvIrOJWg1k7SQ3Wp1ddZhsRXiDQsCSGzVNL1BxDesDSplr1acyax6Wn-TR6TGoVH2T-VdTZZP9C6f-aO"/>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1 group-hover:text-primary-fixed-dim transition-colors">Aether RAM 64GB</h2>
+<p class="font-body-sm text-body-md text-on-surface-variant mb-4 line-clamp-2">Ultra-low latency memory modules designed specifically for quantum-classical hybrid systems.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">$499</span>
+<button class="bg-transparent border border-outline-variant hover:border-primary-container text-on-surface hover:text-primary-container font-label-md text-label-md px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-colors">
+                                View <span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer flex flex-col h-full relative transition-all duration-300">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-error-container/20 text-error font-label-sm text-label-sm px-2 py-1 rounded-full border border-error-container/30 backdrop-blur-md">LIMITED</span>
+</div>
+<div class="h-48 w-full bg-surface-container-highest flex items-center justify-center p-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent z-0"></div>
+<img class="object-contain h-full w-full z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" data-alt="Close-up macro photography of a sophisticated liquid cooling block for a computer processor. The block is machined from dark, brushed aluminum with a transparent acrylic top revealing intricate micro-fins and vibrant, glowing cyan coolant flowing through it. Dark mode aesthetic, moody lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXFurOgGYPPS3BlM12dS2sgWPBcrjjU3fXwbuVSRqGAbuwkLQOVCRNaZ3S9fpEoqz5P_HI8IR7PbtJL47MEWBDQJD2ORJNw9TCp4NP3lFIaUv_LcIs5TQaLZ99X5JqrE4uofvHmAujQxyz6KvcrRof2R4xuxk65DyYB8IXeRUG69hpRI-dDlRO0dbZv_QrObeaKE0LJEt1WIo9jX0Cic6juGlu7M_rIB7enSKzMImUpZ2rBxS4L8TTXPk57oeM8Fb7cPjltzzwLOeY"/>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1 group-hover:text-primary-fixed-dim transition-colors">CryoFlow Loop</h2>
+<p class="font-body-sm text-body-md text-on-surface-variant mb-4 line-clamp-2">Advanced cryogenic cooling solution ensuring optimal operating temperatures under extreme loads.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">$249</span>
+<button class="btn-primary font-label-md text-label-md px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
+                                Add <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer flex flex-col h-full relative transition-all duration-300">
+<div class="h-48 w-full bg-surface-container-highest flex items-center justify-center p-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent z-0"></div>
+<img class="object-contain h-full w-full z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" data-alt="A sleek, minimalist solid-state drive (SSD) featuring an obsidian black outer shell with a singular, sharp, illuminated cyan line running diagonally across its surface. The drive is resting on a textured, dark grey graphite surface with soft, diffused top-down lighting highlighting its premium finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Ym6rbeQcir2NjXO_VMwj67rtDf2izlhJWO4k9VieYCIxje01ew0LQSNI5455wbxWRPNKotjrloHNwdTkm4KMTmtYTecJ9TS7JkGszdizDF5uNniim2T119S_yvbjvSe0aeWlEGZkoaAYmFwRu_Smwu5eemGqIhFXu_cEuEISBVHt5vKNyMzMq9iY7Df8HjiKy9mw9Pibevte1KudOhTbGoS2YZVGRbJsGwt4gdALMYlUXhpylUfJ7_ysMqGrvYsjNWU7CJwxsdQ6"/>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1 group-hover:text-primary-fixed-dim transition-colors">Void Storage 2TB</h2>
+<p class="font-body-sm text-body-md text-on-surface-variant mb-4 line-clamp-2">Hyper-speed NVMe solid state drive utilizing proprietary quantum state-saving protocols.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">$329</span>
+<button class="bg-transparent border border-outline-variant hover:border-primary-container text-on-surface hover:text-primary-container font-label-md text-label-md px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-colors">
+                                View <span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-lg flex justify-center items-center gap-2">
+<button class="p-2 rounded-md border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-1">
+<button class="w-10 h-10 rounded-md bg-primary-container text-on-primary-fixed font-label-md text-label-md font-bold flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.3)]">1</button>
+<button class="w-10 h-10 rounded-md border border-transparent hover:border-outline-variant text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">2</button>
+<button class="w-10 h-10 rounded-md border border-transparent hover:border-outline-variant text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-on-surface-variant">...</span>
+</div>
+<button class="p-2 rounded-md border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest mt-auto border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-xl max-w-container-max mx-auto">
+<div class="mb-4 md:mb-0 text-center md:text-left">
+<div class="font-headline-md text-headline-md text-on-surface mb-2">Quantum Store</div>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Quantum Store. Engineered for the future.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-md gap-y-sm">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Shipping</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Newsletter</a>
+</nav>
+</div>
+</footer>
+</body></html>
