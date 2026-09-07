@@ -83,6 +83,13 @@ A modern, high-performance e-commerce web application featuring a premium, futur
 
 This application is 100% production-ready and configured for cloud deployment:
 
+#### Deploy to Vercel (Fast & Global CDN)
+1. Go to [Vercel.com](https://vercel.com) and sign in with GitHub.
+2. Click **Add New...** &rarr; **Project** and import `SHIKHARCHATURVEDI19/codealpha_tasks`.
+3. In **Environment Variables**, add:
+   - `JWT_SECRET`: `your_super_secret_jwt_key_here`
+4. Click **Deploy**. Vercel will automatically read `vercel.json` and deploy both the static frontend and the serverless `/api` backend!
+
 #### Deploy to Render
 1. Connect your GitHub repository to [Render.com](https://render.com).
 2. Create a new **Web Service**.

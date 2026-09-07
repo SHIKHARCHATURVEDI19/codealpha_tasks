@@ -1,7 +1,25 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 
-const dbPath = path.resolve(__dirname, 'database_v2.sqlite');
+// Vercel serverless environments have a read-only filesystem except /tmp
+const isVercel = process.env.VERCEL || process.env.NOW_REGION || process.env.AWS_LAMBDA_FUNCTION_NAME;
+const localDbPath = path.resolve(__dirname, 'database_v2.sqlite');
+let dbPath = localDbPath;
+
+if (isVercel) {
+    const tmpDbPath = path.join('/tmp', 'database_v2.sqlite');
+    if (!fs.existsSync(tmpDbPath) && fs.existsSync(localDbPath)) {
+        try {
+            fs.copyFileSync(localDbPath, tmpDbPath);
+            console.log('Copied database to writable /tmp on Vercel');
+        } catch (e) {
+            console.error('Failed to copy database to /tmp', e);
+        }
+    }
+    dbPath = fs.existsSync(tmpDbPath) ? tmpDbPath : localDbPath;
+}
+
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error('Error opening database', err.message);
