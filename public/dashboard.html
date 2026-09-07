@@ -138,17 +138,19 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.05)]">
 <div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
-<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-container">Quantum Store</div>
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-container cursor-pointer" onclick="window.location.href='index.html'">Quantum Store</div>
 <nav class="hidden md:flex gap-lg items-center">
-<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-300 font-body-md text-body-md" href="index.html">Home</a>
 <a class="text-on-surface-variant hover:text-primary-container transition-colors duration-300 font-body-md text-body-md" href="index.html#products-container">Latest Drops</a>
 <a class="text-on-surface-variant hover:text-primary-container transition-colors duration-300 font-body-md text-body-md" href="category.html?c=quantum">Quantum Collection</a>
 <a class="text-on-surface-variant hover:text-primary-container transition-colors duration-300 font-body-md text-body-md" href="category.html?c=hardware">Hardware</a>
 <a class="text-on-surface-variant hover:text-primary-container transition-colors duration-300 font-body-md text-body-md" href="support.html">Support</a>
 </nav>
 <div class="flex items-center gap-md">
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container active:scale-95 transition-all">shopping_cart</button>
-<button class="material-symbols-outlined text-primary-container border-b-2 border-primary-container pb-1 active:scale-95 transition-all">account_circle</button>
+<button onclick="window.location.href='cart.html'" class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors p-2 active:scale-95 relative" data-icon="shopping_cart">
+    shopping_cart
+    <span class="absolute top-0 right-0 bg-primary-container text-black rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold cart-count">0</span>
+</button>
+<div id="auth-links" class="flex items-center gap-3 font-label-sm"></div>
 </div>
 </div>
 </header>
@@ -158,12 +160,12 @@
 <div class="lg:col-span-8 flex flex-col md:flex-row items-center gap-md">
 <div class="relative group">
 <div class="absolute -inset-1 bg-gradient-to-r from-primary-container to-blue-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-<div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary-container/20">
-<img class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a tech-savvy professional with a futuristic aesthetic. The individual has subtle cybernetic accents around the eyes, lit by a soft cyan ambient glow. The background is a blurred high-tech lab with glass panels and holographic displays. The overall color palette consists of deep blacks, cool grays, and electric cyan highlights, reflecting a premium dark-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9P5pJ25L8cubxOnS3xmFLXJGrxCfauIMqPUsy6ybt0_hjUEOULk75X9s2zg8TKPrHrSizvxyWIaLyIHoCtcHoibkZHb1XaFchPr8-uJswlJEivI_R4u5PBsQInIEfGAiEWj0-Mrfljj11MTYdQTCiO6Hp_TmZ68ebZoqWnErEnBdT9-rD7JLRc7Rl05y6qQldrdRq40yLDYirq1pGTHBIHsPJvlCTP6WMho9tn8HWElx4WHDAogbPrePkL3g5X0Tp-o8__ts7CeOo">
+<div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary-container/20 bg-surface-container">
+<img class="w-full h-full object-cover" src="assets/Smartwatch_showing_health_metrics_202607191442.jpeg" alt="User Profile">
 </div>
 </div>
 <div class="text-center md:text-left">
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Welcome back, Alex Thorne</h1>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs" id="user-name">Welcome back, Explorer</h1>
 <div class="flex flex-wrap justify-center md:justify-start gap-xs">
 <span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-label-sm font-label-sm border border-primary-container/20 flex items-center gap-1">
 <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -175,11 +177,11 @@
 </div>
 <div class="lg:col-span-4 grid grid-cols-2 gap-sm">
 <div class="glass-card p-sm rounded-xl text-center">
-<div class="text-primary-container font-headline-md text-headline-md">12</div>
-<div class="text-on-surface-variant text-label-sm">Active Orders</div>
+<div class="text-primary-container font-headline-md text-headline-md font-bold" id="active-orders-count">0</div>
+<div class="text-on-surface-variant text-label-sm">Total Orders</div>
 </div>
 <div class="glass-card p-sm rounded-xl text-center">
-<div class="text-primary-container font-headline-md text-headline-md">8.4k</div>
+<div class="text-primary-container font-headline-md text-headline-md font-bold" id="user-points">1.2k</div>
 <div class="text-on-surface-variant text-label-sm">Q-Points</div>
 </div>
 </div>
@@ -190,129 +192,50 @@
 <aside class="space-y-md lg:col-span-1">
 <div class="glass-card rounded-xl overflow-hidden">
 <div class="p-md space-y-xs">
-<button class="w-full flex items-center gap-sm px-md py-sm bg-primary-container/10 text-primary-container rounded-lg transition-all text-left">
+<button class="w-full flex items-center gap-sm px-md py-sm bg-primary-container/10 text-primary-container rounded-lg transition-all text-left font-semibold">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md">Dashboard Overview</span>
 </button>
-<button class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
-<span class="material-symbols-outlined">inventory_2</span>
-<span class="font-label-md">Order History</span>
+<button onclick="window.location.href='cart.html'" class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md">Active Cart</span>
 </button>
-<button class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md">Security &amp; Identity</span>
+<button onclick="window.location.href='support.html'" class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md">Diagnostics & Support</span>
 </button>
-<button class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-<span class="font-label-md">Billing Methods</span>
+<button onclick="window.location.href='category.html?c=hardware'" class="w-full flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-white/5 hover:text-on-surface rounded-lg transition-all text-left">
+<span class="material-symbols-outlined">memory</span>
+<span class="font-label-md">Hardware Catalog</span>
 </button>
 </div>
 </div>
 <!-- Special Offer Card (Bento Style) -->
-<div class="relative rounded-xl overflow-hidden h-64 group">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A macro shot of a glowing high-performance CPU with intricate cyan circuitry patterns pulsating with light. The shot is dark and moody, with heavy bokeh effects in the background showing other server components. The lighting is dominated by neon cyan and deep violet hues, creating a futuristic and technically superior atmosphere typical of high-end hardware manufacturing." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCi9ZsyiLQrK--n2V-5MGJB82S0FU5jOOGa3kXbWkLEEMSDo5ySunQdYUTNPmobXr18um7BGF9gDBUJApidWH_7dD8RlQFkxHrU9KKehQXc9Zm_2lEScGZtxpYbH0JQGTwYsibA0ptNP0eiIocSnnluS2p1tmAjt3YmOLryrjJaBcz1xu7G78GgUr2F2Xvb5bhMh0fBmHNrrTCNijHIVpHEESKXJq-FM7_QbWQmdGNL1B6XhDfDh6PEhdMbq02msocD8ABcKllg22aT')"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent"></div>
+<div class="relative rounded-xl overflow-hidden h-64 group border border-white/5">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-70" style="background-image: url('assets/gpu_aetherium_x7.jpg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/50 to-transparent"></div>
 <div class="absolute bottom-0 left-0 p-md w-full">
-<div class="text-primary-container font-label-sm mb-base uppercase tracking-widest">Upgrade Pending</div>
-<h3 class="font-headline-md text-on-surface mb-sm">Next-Gen Quantum Kit</h3>
-<button class="bg-primary-container text-on-primary px-sm py-xs rounded-lg font-label-md hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all active:scale-95">Pre-order Now</button>
+<div class="text-primary-container font-label-sm mb-base uppercase tracking-widest text-xs font-bold">Hardware Spotlight</div>
+<h3 class="font-headline-md text-on-surface mb-sm font-semibold text-lg">Aetherium X7 Neural GPU</h3>
+<button onclick="window.location.href='category.html?c=hardware'" class="bg-primary-container text-on-primary-container px-sm py-xs rounded-lg font-label-md hover:brightness-110 transition-all active:scale-95 font-bold text-xs">Explore Drop &rarr;</button>
 </div>
 </div>
 </aside>
 <!-- Center/Right Column: Order History -->
 <div class="lg:col-span-2 space-y-md">
-<div class="flex items-center justify-between">
-<h2 class="font-headline-md text-on-surface">Recent Order Stream</h2>
-<div class="flex gap-xs">
-<button class="px-3 py-1 rounded-full text-label-sm border border-outline-variant text-on-surface-variant hover:border-primary-container hover:text-primary-container transition-all">All</button>
-<button class="px-3 py-1 rounded-full text-label-sm border border-primary-container text-primary-container bg-primary-container/10 transition-all">Processing</button>
-<button class="px-3 py-1 rounded-full text-label-sm border border-outline-variant text-on-surface-variant hover:border-primary-container hover:text-primary-container transition-all">Delivered</button>
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline-md text-on-surface font-semibold text-xl">Recent Order Stream</h2>
+<span class="text-xs text-primary-container font-label-sm flex items-center gap-1">
+    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+    Live Telemetry
+</span>
 </div>
+<div id="orders-stream-container" class="min-h-[200px]">
+    <div class="glass-card rounded-xl p-8 text-center text-on-surface-variant text-sm">
+        <span class="material-symbols-outlined animate-spin text-2xl text-primary-container mb-2">sync</span>
+        <div>Synchronizing Quantum Order Telemetry...</div>
+    </div>
 </div>
-<!-- Order Item 1 -->
-<div class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-md items-center group transition-all duration-300">
-<div class="w-24 h-24 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden border border-white/5 group-hover:border-primary-container/30 transition-all">
-<img class="w-full h-full object-cover" data-alt="A sleek, high-resolution product photography of a premium graphics card with transparent glass housing and integrated RGB lighting glowing in cyan. The card sits on a reflective black surface, appearing to float. The lighting is precise, highlighting the brushed metal textures and the complex cooling fins. Minimalist and ultra-high-tech aesthetic." src="assets/unnamed.jpg">
-</div>
-<div class="flex-grow space-y-xs text-center md:text-left">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
-<h4 class="font-headline-md text-body-lg text-on-surface">Quantum-X 9000 GPU</h4>
-<span class="text-primary-container font-headline-md text-body-lg">$2,499.00</span>
-</div>
-<div class="text-on-surface-variant text-body-md">Order #QX-88291 • Nov 24, 2024</div>
-<div class="flex flex-wrap justify-center md:justify-start gap-sm items-center mt-sm">
-<span class="flex items-center gap-1 text-primary-container text-label-sm">
-<span class="material-symbols-outlined text-[18px]">package_2</span>
-                                Processing
-                            </span>
-<span class="text-on-surface-variant text-label-sm">•</span>
-<span class="text-on-surface-variant text-label-sm">Estimated Delivery: Nov 28</span>
-</div>
-</div>
-<div class="w-full md:w-auto">
-<button class="w-full md:w-auto bg-transparent border border-white/20 hover:border-primary-container text-on-surface px-md py-sm rounded-lg backdrop-blur-md transition-all font-label-md flex items-center justify-center gap-2 group/btn">
-                            Track Order
-                            <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</div>
-</div>
-<!-- Order Item 2 -->
-<div class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-md items-center group transition-all duration-300">
-<div class="w-24 h-24 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden border border-white/5 group-hover:border-primary-container/30 transition-all">
-<img class="w-full h-full object-cover" data-alt="A macro shot of a high-speed SSD module with a futuristic heat sink. The metal surface features laser-etched circuitry that catches a soft violet and cyan light. The lighting creates high-contrast shadows, emphasizing the technical precision and luxury feel of the component. Background is deep charcoal with subtle geometric patterns." src="assets/unnamed (1).jpg">
-</div>
-<div class="flex-grow space-y-xs text-center md:text-left">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
-<h4 class="font-headline-md text-body-lg text-on-surface">Hyper-Drive S8 Storage</h4>
-<span class="text-on-surface-variant font-headline-md text-body-lg">$899.00</span>
-</div>
-<div class="text-on-surface-variant text-body-md">Order #QX-87102 • Nov 20, 2024</div>
-<div class="flex flex-wrap justify-center md:justify-start gap-sm items-center mt-sm">
-<span class="flex items-center gap-1 text-green-400 text-label-sm">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-                                Delivered
-                            </span>
-<span class="text-on-surface-variant text-label-sm">•</span>
-<span class="text-on-surface-variant text-label-sm">Received on Nov 22</span>
-</div>
-</div>
-<div class="w-full md:w-auto">
-<button class="w-full md:w-auto bg-transparent border border-white/20 hover:border-primary-container text-on-surface px-md py-sm rounded-lg backdrop-blur-md transition-all font-label-md flex items-center justify-center gap-2 group/btn">
-                            Buy Again
-                        </button>
-</div>
-</div>
-<!-- Order Item 3 (Shipped) -->
-<div class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-md items-center group transition-all duration-300">
-<div class="w-24 h-24 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden border border-white/5 group-hover:border-primary-container/30 transition-all">
-<img class="w-full h-full object-cover" data-alt="A minimalist tech accessory, a sleek metallic cooling hub for a quantum computer system. It features a circular LED ring pulsating in a deep cyan color. The finish is matte black with subtle chamfered edges that reflect a cool white light. The overall composition is clean, centered, and sophisticated, set against a dark, tech-oriented backdrop." src="assets/unnamed (2).jpg">
-</div>
-<div class="flex-grow space-y-xs text-center md:text-left">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
-<h4 class="font-headline-md text-body-lg text-on-surface">Cryo-Link Cooler Pro</h4>
-<span class="text-on-surface-variant font-headline-md text-body-lg">$420.00</span>
-</div>
-<div class="text-on-surface-variant text-body-md">Order #QX-86554 • Nov 18, 2024</div>
-<div class="flex flex-wrap justify-center md:justify-start gap-sm items-center mt-sm">
-<span class="flex items-center gap-1 text-yellow-400 text-label-sm">
-<span class="material-symbols-outlined text-[18px]">local_shipping</span>
-                                Shipped
-                            </span>
-<span class="text-on-surface-variant text-label-sm">•</span>
-<span class="text-on-surface-variant text-label-sm">In Transit (Neo-Tokyo Hub)</span>
-</div>
-</div>
-<div class="w-full md:w-auto">
-<button class="w-full md:w-auto bg-transparent border border-white/20 hover:border-primary-container text-on-surface px-md py-sm rounded-lg backdrop-blur-md transition-all font-label-md flex items-center justify-center gap-2 group/btn">
-                            Track Order
-                        </button>
-</div>
-</div>
-<div class="flex justify-center pt-md">
-<button class="text-on-surface-variant hover:text-primary-container flex items-center gap-sm transition-colors duration-300 font-label-md">
-                        View Full Archive
-                        <span class="material-symbols-outlined">expand_more</span>
-</button>
 </div>
 </div>
 </div>

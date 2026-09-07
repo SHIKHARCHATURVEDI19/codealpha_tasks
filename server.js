@@ -112,10 +112,32 @@ app.get('/api/products/:id', (req, res) => {
     });
 });
 
+// Health check endpoint for cloud deployment & monitoring
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
+
+// Current authenticated user profile
+app.get('/api/auth/me', authenticateToken, (req, res) => {
+    db.get("SELECT id, username, email FROM Users WHERE id = ?", [req.user.id], (err, user) => {
+        if (err) return res.status(500).json({ error: "Database error" });
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        db.get("SELECT COUNT(*) AS order_count, COALESCE(SUM(total_price), 0) AS total_spent FROM Orders WHERE user_id = ?", [user.id], (err, stats) => {
+            const orderCount = stats ? stats.order_count : 0;
+            const totalSpent = stats ? stats.total_spent : 0;
+            res.json({
+                ...user,
+                activeOrders: orderCount,
+                qPoints: Math.round(totalSpent * 10) + 120
+            });
+        });
+    });
+});
+
 // Create order
 app.post('/api/orders', authenticateToken, (req, res) => {
-    const { items, total_price } = req.body; 
-    // items should be an array of { product_id, quantity, price }
+    const { items, total_price, shipping_address } = req.body; 
     const user_id = req.user.id;
 
     if (!items || items.length === 0) {
@@ -124,7 +146,7 @@ app.post('/api/orders', authenticateToken, (req, res) => {
 
     db.run("BEGIN TRANSACTION");
 
-    const orderStmt = db.prepare("INSERT INTO Orders (user_id, total_price) VALUES (?, ?)");
+    const orderStmt = db.prepare("INSERT INTO Orders (user_id, total_price, status) VALUES (?, ?, 'processing')");
     orderStmt.run([user_id, total_price], function(err) {
         if (err) {
             db.run("ROLLBACK");
@@ -147,20 +169,67 @@ app.post('/api/orders', authenticateToken, (req, res) => {
                 return res.status(500).json({ error: "Failed to save order items" });
             }
             db.run("COMMIT");
-            res.status(201).json({ message: "Order placed successfully", orderId });
+            res.status(201).json({ 
+                message: "Order placed successfully", 
+                orderId, 
+                orderNumber: `QX-${Math.floor(10000 + Math.random() * 90000)}` 
+            });
         });
     });
     orderStmt.finalize();
 });
 
-// Get user orders
+// Get user orders with items & product details
 app.get('/api/orders', authenticateToken, (req, res) => {
-    db.all("SELECT * FROM Orders WHERE user_id = ? ORDER BY created_at DESC", [req.user.id], (err, rows) => {
+    const userId = req.user.id;
+    db.all("SELECT * FROM Orders WHERE user_id = ? ORDER BY created_at DESC", [userId], (err, orders) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
+        if (!orders || orders.length === 0) return res.json([]);
+
+        const orderIds = orders.map(o => o.id);
+        const placeholders = orderIds.map(() => '?').join(',');
+
+        db.all(`SELECT oi.*, p.name AS product_name, p.image_url AS product_image 
+                FROM OrderItems oi 
+                LEFT JOIN Products p ON oi.product_id = p.id 
+                WHERE oi.order_id IN (${placeholders})`, orderIds, (itemErr, items) => {
+            if (itemErr) {
+                return res.json(orders.map(o => ({ ...o, items: [] })));
+            }
+
+            const itemsByOrder = {};
+            items.forEach(item => {
+                if (!itemsByOrder[item.order_id]) itemsByOrder[item.order_id] = [];
+                itemsByOrder[item.order_id].push(item);
+            });
+
+            const enrichedOrders = orders.map(order => ({
+                ...order,
+                items: itemsByOrder[order.id] || []
+            }));
+
+            res.json(enrichedOrders);
+        });
     });
 });
 
+// Submit support ticket
+app.post('/api/support/ticket', (req, res) => {
+    const { serial_number, category, description, priority } = req.body;
+    if (!description) {
+        return res.status(400).json({ error: "Description is required" });
+    }
+
+    const stmt = db.prepare("INSERT INTO Tickets (serial_number, category, description, priority) VALUES (?, ?, ?, ?)");
+    stmt.run([serial_number || 'N/A', category || 'General Inquiry', description, priority || 'Standard'], function(err) {
+        if (err) return res.status(500).json({ error: "Failed to submit ticket" });
+        res.status(201).json({ 
+            message: "Ticket submitted successfully", 
+            ticketId: `TICK-${this.lastID.toString().padStart(4, '0')}` 
+        });
+    });
+    stmt.finalize();
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

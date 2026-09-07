@@ -150,7 +150,7 @@
 <div class="flex items-center space-x-md">
 <div class="hidden md:block relative">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
-<input class="bg-[#0A0A0A] border border-outline-variant rounded-full py-2 pl-10 pr-4 text-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none w-64 placeholder-on-surface-variant" placeholder="Search products..." type="text">
+<input id="search-input" class="bg-[#0A0A0A] border border-outline-variant rounded-full py-2 pl-10 pr-4 text-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none w-64 placeholder-on-surface-variant" placeholder="Search products..." type="text">
 </div>
 <button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/10 p-2 rounded-full relative" id="cart-btn" onclick="window.location.href='cart.html'">
 <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
@@ -167,7 +167,7 @@
 <div class="relative z-10 text-center flex flex-col items-center p-xl glass-panel rounded-2xl max-w-3xl mx-sm">
 <h1 class="font-display-lg text-display-lg gradient-text mb-sm uppercase tracking-tight">Next-Gen Tech</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Discover the future with our exclusive quantum collection. Engineered for absolute precision.</p>
-<button class="btn-primary font-label-md text-label-md px-xl py-md rounded-full uppercase tracking-wider font-bold">Shop Now</button>
+<button onclick="document.getElementById('products-container').scrollIntoView({ behavior: 'smooth' })" class="btn-primary font-label-md text-label-md px-xl py-md rounded-full uppercase tracking-wider font-bold">Shop Now</button>
 </div>
 </section>
 <!-- Featured Categories (Bento Grid) -->

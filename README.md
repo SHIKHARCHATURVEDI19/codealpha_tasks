@@ -78,3 +78,34 @@ A modern, high-performance e-commerce web application featuring a premium, futur
 
 4. **Access the application**:
    Open your browser and navigate to `http://localhost:3000`
+
+### 🌐 Live Cloud Deployment
+
+This application is 100% production-ready and configured for cloud deployment:
+
+#### Deploy to Render
+1. Connect your GitHub repository to [Render.com](https://render.com).
+2. Create a new **Web Service**.
+3. Render will automatically detect `render.yaml` or you can manually configure:
+   - **Environment**: `Node`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+4. Set environment variable `JWT_SECRET` in the Render dashboard.
+
+#### Deploy to Railway / VPS
+1. Set up a Node service with `PORT` and `JWT_SECRET`.
+2. Run `npm install && npm start`.
+3. The server uses relative `/api` endpoints, ensuring seamless HTTPS operation on any domain.
+
+### 📡 API Endpoints Overview
+
+- `GET /api/health` - Cloud uptime health check
+- `POST /api/auth/register` - Create user account
+- `POST /api/auth/login` - Authenticate & obtain JWT
+- `GET /api/auth/me` - Get current user profile & telemetry
+- `GET /api/products` - Fetch product catalog (supports `?category=`)
+- `GET /api/products/:id` - Fetch single product specifications
+- `POST /api/orders` - Place new order (authenticated)
+- `GET /api/orders` - Fetch authenticated user's order stream & items
+- `POST /api/support/ticket` - Submit technical support diagnostics ticket
+
