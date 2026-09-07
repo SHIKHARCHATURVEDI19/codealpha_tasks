@@ -2,6 +2,8 @@
 
 This repository contains multiple tasks developed for CodeAlpha.
 
+🌐 **Live Quantum Store Deployment:** [https://quantum-store-v1.vercel.app/](https://quantum-store-v1.vercel.app/)
+
 ## Task 1: Vibe | Social Media Application
 
 A hyper-modern, resume-worthy social media application built with Django and Vanilla JavaScript.
@@ -31,6 +33,8 @@ A hyper-modern, resume-worthy social media application built with Django and Van
 ---
 
 ## Task 2: Quantum Store | E-commerce Application
+
+🔗 **Live Demo:** [https://quantum-store-v1.vercel.app/](https://quantum-store-v1.vercel.app/)
 
 A modern, high-performance e-commerce web application featuring a premium, futuristic dark-mode UI/UX. Designed for technology enthusiasts, the platform offers a sleek interface with glassmorphism effects, dynamic interactions, and a fully functional shopping cart and user dashboard.
 
